@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CDME 2026 Training Whiteboard</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&amp;family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    .whiteboard-bg {
+      background-color: #f8f6f0;
+      background-image: 
+        radial-gradient(circle, #d4d0c8 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .sticky { box-shadow: 2px 3px 8px rgba(0,0,0,0.12); }
+    .marker-text { font-family: 'Caveat', cursive; }
+    .clean-text { font-family: 'DM Sans', sans-serif; }
+    .tape {
+      position: absolute;
+      width: 60px;
+      height: 20px;
+      background: rgba(255,220,100,0.6);
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%) rotate(-2deg);
+      border-radius: 2px;
+    }
+    .pin {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      background: radial-gradient(circle at 4px 4px, #e74c3c, #c0392b);
+      border-radius: 50%;
+      top: -7px;
+      left: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+    .division-card {
+      transition: transform 0.2s;
+    }
+    .division-card:hover {
+      transform: scale(1.02);
+    }
+    .task-chip {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      margin: 2px;
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ <script src="/_sdk/telemetry_sdk.js"></script></head>
+ <body class="h-full">
+  <div class="whiteboard-bg h-full overflow-auto clean-text" id="app-wrapper"><!-- Header -->
+   <div class="sticky top-0 z-50 bg-white/80 backdrop-blur-sm border-b border-stone-200 px-4 py-3">
+    <div class="max-w-7xl mx-auto flex items-center justify-between flex-wrap gap-2">
+     <h1 class="marker-text text-2xl md:text-3xl font-bold text-stone-800" id="board-title">Capacity Building: Dynamic Modeling &amp; Analysis of Electric Grid</h1>
+     <div class="flex gap-1 text-xs"><span class="bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full font-semibold">CDME 2026</span> <span class="bg-amber-100 text-amber-800 px-2 py-1 rounded-full font-semibold">15+ Tasks</span>
+     </div>
+    </div>
+   </div>
+   <div class="max-w-7xl mx-auto px-4 py-6 space-y-8"><!-- Section: Training Topics (Gallery as sticky notes) -->
+    <section>
+     <h2 class="marker-text text-3xl text-stone-700 mb-4 flex items-center gap-2"><span class="w-3 h-8 bg-emerald-500 rounded-full inline-block"></span> Training Topics</h2>
+     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+      <div class="sticky bg-yellow-100 rounded-lg p-4 relative rotate-[-1deg]">
+       <div class="tape"></div>
+       <h3 class="marker-text text-lg font-bold text-yellow-900 mt-2">Frequency Stability</h3>
+       <p class="text-xs text-yellow-800 mt-1">Nadir, RoCoF, G2 outage, load step</p>
+      </div>
+      <div class="sticky bg-green-100 rounded-lg p-4 relative rotate-[1deg]">
+       <div class="tape"></div>
+       <h3 class="marker-text text-lg font-bold text-green-900 mt-2">Small Signal &amp; Eigenvalues</h3>
+       <p class="text-xs text-green-800 mt-1">Modal analysis, PSS tuning</p>
+      </div>
+      <div class="sticky bg-blue-100 rounded-lg p-4 relative rotate-[-0.5deg]">
+       <div class="tape"></div>
+       <h3 class="marker-text text-lg font-bold text-blue-900 mt-2">Transient Stability</h3>
+       <p class="text-xs text-blue-800 mt-1">CCT, TSI, fault clearance</p>
+      </div>
+      <div class="sticky bg-pink-100 rounded-lg p-4 relative rotate-[1.5deg]">
+       <div class="tape"></div>
+       <h3 class="marker-text text-lg font-bold text-pink-900 mt-2">Voltage Stability</h3>
+       <p class="text-xs text-pink-800 mt-1">QV/PV curves, VSM, compensator</p>
+      </div>
+      <div class="sticky bg-purple-100 rounded-lg p-4 relative rotate-[-1.5deg]">
+       <div class="tape"></div>
+       <h3 class="marker-text text-lg font-bold text-purple-900 mt-2">Modeling &amp; Simulation</h3>
+       <p class="text-xs text-purple-800 mt-1">Generator addition, PSS_STAB1</p>
+      </div>
+      <div class="sticky bg-orange-100 rounded-lg p-4 relative rotate-[0.5deg]">
+       <div class="tape"></div>
+       <h3 class="marker-text text-lg font-bold text-orange-900 mt-2">Protection &amp; Faults</h3>
+       <p class="text-xs text-orange-800 mt-1">3-phase faults, CSV export</p>
+      </div>
+     </div>
+    </section><!-- Section: All Tasks (index cards) -->
+    <section>
+     <h2 class="marker-text text-3xl text-stone-700 mb-4 flex items-center gap-2"><span class="w-3 h-8 bg-sky-500 rounded-full inline-block"></span> All Hands-on Tasks</h2>
+     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+      <div class="sticky bg-white rounded-xl p-4 border-l-4 border-emerald-500 relative">
+       <div class="pin"></div>
+       <p class="text-[0.65rem] uppercase font-bold text-emerald-600 tracking-wide">Initial Modeling</p>
+       <h3 class="font-bold text-sm text-stone-800 mt-1">Task 1: Model Setup &amp; Modal Analysis</h3>
+       <p class="text-xs text-stone-600 mt-1">Generator 69MW, IEEET1S, IEEE G3. Eigenvalue analysis → critical eigenvalues, damping ratio, participation factor.</p><span class="task-chip bg-emerald-50 text-emerald-700 mt-2">hands-on</span>
+      </div>
+      <div class="sticky bg-white rounded-xl p-4 border-l-4 border-sky-500 relative">
+       <div class="pin"></div>
+       <p class="text-[0.65rem] uppercase font-bold text-sky-600 tracking-wide">Small Signal</p>
+       <h3 class="font-bold text-sm text-stone-800 mt-1">Task 2: 3‑phase fault at Bus 2</h3>
+       <p class="text-xs text-stone-600 mt-1">Fault at 5s clear 5.1s. Plot active power, save CSV, record oscillations.</p><span class="task-chip bg-sky-50 text-sky-700 mt-2">hands-on</span>
+      </div>
+      <div class="sticky bg-white rounded-xl p-4 border-l-4 border-sky-500 relative">
+       <div class="pin"></div>
+       <p class="text-[0.65rem] uppercase font-bold text-sky-600 tracking-wide">Small Signal</p>
+       <h3 class="font-bold text-sm text-stone-800 mt-1">Task 3: Line length 200km</h3>
+       <p class="text-xs text-stone-600 mt-1">x=0.4Ω/km. Recompute eigenvalues, compare damping ratio.</p><span class="task-chip bg-sky-50 text-sky-700 mt-2">hands-on</span>
+      </div>
+      <div class="sticky bg-white rounded-xl p-4 border-l-4 border-sky-500 relative">
+       <div class="pin"></div>
+       <p class="text-[0.65rem] uppercase font-bold text-sky-600 tracking-wide">Small Signal</p>
+       <h3 class="font-bold text-sm text-stone-800 mt-1">Task 4: Fault on long line</h3>
+       <p class="text-xs text-stone-600 mt-1">3-phase fault, compare CSV with Task 2, observe reduced damping.</p><span class="task-chip bg-sky-50 text-sky-700 mt-2">hands-on</span>
+      </div>
+      <div class="sticky bg-white rounded-xl p-4 border-l-4 border-violet-500 relative">
+       <div class="pin"></div>
+       <p class="text-[0.65rem] uppercase font-bold text-violet-600 tracking-wide">PSS Tuning</p>
+       <h3 class="font-bold text-sm text-stone-800 mt-1">Task 5: Add PSS_STAB1</h3>
+       <p class="text-xs text-stone-600 mt-1">Add PSS, extract eigenvalues, damping ratio improvement, participation factor.</p><span class="task-chip bg-violet-50 text-violet-700 mt-2">hands-on</span>
+      </div>
+      <div class="sticky bg-white rounded-xl p-4 border-l-4 border-violet-500 relative">
+       <div class="pin"></div>
+       <p class="text-[0.65rem] uppercase font-bold text-violet-600 tracking-wide">PSS Tuning</p>
+       <h3 class="font-bold text-sm text-stone-800 mt-1">Task 6: PSS + Fault Response</h3>
+       <p class="text-xs text-stone-600 mt-1">Fault at Bus 2 with PSS, compare CSV, observe damping enhancement.</p><span class="task-chip bg-violet-50 text-violet-700 mt-2">hands-on</span>
+      </div>
+      <div class="sticky bg-white rounded-xl p-4 border-l-4 border-violet-500 relative">
+       <div class="pin"></div>
+       <p class="text-[0.65rem] uppercase font-bold text-violet-600 tracking-wide">PSS Tuning</p>
+       <h3 class="font-bold text-sm text-stone-800 mt-1">Task 7: Parameter Sweep on PSS</h3>
+       <p class="text-xs text-stone-600 mt-1">Test gains &amp; time constants, evaluate damping factor.</p><span class="task-chip bg-violet-50 text-violet-700 mt-2">hands-on</span>
+      </div>
+      <div class="sticky bg-white rounded-xl p-4 border-l-4 border-amber-500 relative">
+       <div class="pin"></div>
+       <p class="text-[0.65rem] uppercase font-bold text-amber-600 tracking-wide">Frequency Stability</p>
+       <h3 class="font-bold text-sm text-stone-800 mt-1">Task 4 (Freq): Add 20MW generator</h3>
+       <p class="text-xs text-stone-600 mt-1">Add 20MW gen, outage of G2 → NADIR, over-frequency, RoCoF.</p><span class="task-chip bg-amber-50 text-amber-700 mt-2">hands-on</span>
+      </div>
+      <div class="sticky bg-white rounded-xl p-4 border-l-4 border-amber-500 relative">
+       <div class="pin"></div>
+       <p class="text-[0.65rem] uppercase font-bold text-amber-600 tracking-wide">Frequency Stability</p>
+       <h3 class="font-bold text-sm text-stone-800 mt-1">Task 5: Load increase 10%</h3>
+       <p class="text-xs text-stone-600 mt-1">Increase P&amp;Q by 10% at 5s, record nadir, RoCoF, steady-state error.</p><span class="task-chip bg-amber-50 text-amber-700 mt-2">hands-on</span>
+      </div>
+      <div class="sticky bg-white rounded-xl p-4 border-l-4 border-amber-500 relative">
+       <div class="pin"></div>
+       <p class="text-[0.65rem] uppercase font-bold text-amber-600 tracking-wide">Frequency Stability</p>
+       <h3 class="font-bold text-sm text-stone-800 mt-1">Task 6: External Grid loss</h3>
+       <p class="text-xs text-stone-600 mt-1">Remove external grid at 5s → islanding frequency behavior.</p><span class="task-chip bg-amber-50 text-amber-700 mt-2">hands-on</span>
+      </div>
+      <div class="sticky bg-white rounded-xl p-4 border-l-4 border-rose-500 relative">
+       <div class="pin"></div>
+       <p class="text-[0.65rem] uppercase font-bold text-rose-600 tracking-wide">Voltage Stability</p>
+       <h3 class="font-bold text-sm text-stone-800 mt-1">Task 1 (Voltage): P-V curve &amp; VSM</h3>
+       <p class="text-xs text-stone-600 mt-1">Load to 80MW, plot P-V curve, VSM, dV/dP sensitivity.</p><span class="task-chip bg-rose-50 text-rose-700 mt-2">hands-on</span>
+      </div>
+      <div class="sticky bg-white rounded-xl p-4 border-l-4 border-rose-500 relative">
+       <div class="pin"></div>
+       <p class="text-[0.65rem] uppercase font-bold text-rose-600 tracking-wide">Voltage Stability</p>
+       <h3 class="font-bold text-sm text-stone-800 mt-1">Task 2: QV curve &amp; compensator</h3>
+       <p class="text-xs text-stone-600 mt-1">QV curve, RPM, compensator sizing for 1pu voltage.</p><span class="task-chip bg-rose-50 text-rose-700 mt-2">hands-on</span>
+      </div>
+      <div class="sticky bg-white rounded-xl p-4 border-l-4 border-red-500 relative">
+       <div class="pin"></div>
+       <p class="text-[0.65rem] uppercase font-bold text-red-600 tracking-wide">Transient Voltage</p>
+       <h3 class="font-bold text-sm text-stone-800 mt-1">Task 3: Compensator off</h3>
+       <p class="text-xs text-stone-600 mt-1">Disable compensator, 3-phase fault at load bus, plot voltage.</p><span class="task-chip bg-red-50 text-red-700 mt-2">hands-on</span>
+      </div>
+      <div class="sticky bg-white rounded-xl p-4 border-l-4 border-red-500 relative">
+       <div class="pin"></div>
+       <p class="text-[0.65rem] uppercase font-bold text-red-600 tracking-wide">Transient Voltage</p>
+       <h3 class="font-bold text-sm text-stone-800 mt-1">Dynamic load 80% &amp; 95%</h3>
+       <p class="text-xs text-stone-600 mt-1">Increase dynamic load, compare voltage recovery, note collapse.</p><span class="task-chip bg-red-50 text-red-700 mt-2">hands-on</span>
+      </div>
+      <div class="sticky bg-white rounded-xl p-4 border-l-4 border-teal-500 relative">
+       <div class="pin"></div>
+       <p class="text-[0.65rem] uppercase font-bold text-teal-600 tracking-wide">Hydropower</p>
+       <h3 class="font-bold text-sm text-stone-800 mt-1">Hydropower ODE Models</h3>
+       <p class="text-xs text-stone-600 mt-1">OpenHPL, Marsyangdi simulation, governor tuning, model fitting.</p><span class="task-chip bg-teal-50 text-teal-700 mt-2">hands-on</span>
+      </div>
+     </div>
+    </section><!-- Section: Detailed Task Breakdown -->
+    <section>
+     <h2 class="marker-text text-3xl text-stone-700 mb-4 flex items-center gap-2"><span class="w-3 h-8 bg-violet-500 rounded-full inline-block"></span> Task Inventory — Detailed Breakdown</h2>
+     <div class="space-y-4"><!-- Division 1 -->
+      <div class="division-card bg-white rounded-2xl overflow-hidden border border-stone-200 sticky">
+       <div class="bg-emerald-50 px-5 py-3 border-b border-emerald-200 border-l-[6px] border-l-emerald-500">
+        <h3 class="font-bold text-stone-800">Initial System Modeling &amp; Eigenvalue Analysis</h3>
+       </div>
+       <div class="p-5">
+        <p class="text-sm text-stone-700"><strong>Task 1:</strong> Generator: 69MW, 11kV; Excitation IEEET1S; Governor IEEE3; lines 80km. Run eigenvalue analysis → extract critical eigenvalues (real part, osc frequency, damping ratio %), participation factor, identify electro-mechanical modes.</p><code class="text-xs bg-stone-100 px-2 py-1 rounded mt-2 inline-block">📁 DIgSILENT PowerFactory · CSV export · Modal analysis</code>
+       </div>
+      </div><!-- Division 2 -->
+      <div class="division-card bg-white rounded-2xl overflow-hidden border border-stone-200 sticky">
+       <div class="bg-sky-50 px-5 py-3 border-b border-sky-200 border-l-[6px] border-l-sky-500">
+        <h3 class="font-bold text-stone-800">Small Signal Stability &amp; Fault Response</h3>
+       </div>
+       <div class="p-5 space-y-3">
+        <div class="border-b border-stone-100 pb-3">
+         <p class="text-sm text-stone-700"><strong>Task 2:</strong> 3‑phase fault at Bus 2 (5s, clear 5.1s). Plot active power through transmission line. Save CSV for time-domain comparison. Record oscillations.</p>
+        </div>
+        <div class="border-b border-stone-100 pb-3">
+         <p class="text-sm text-stone-700"><strong>Task 3:</strong> Line length 200km, x=0.4Ω/km. Recompute eigenvalues: critical real part, damping ratio. Participation factor identification. Compare dynamic response with base case.</p>
+        </div>
+        <div>
+         <p class="text-sm text-stone-700"><strong>Task 4:</strong> 3‑phase fault (long line). Apply fault at Bus 2, clear 5.1s → plot active power, compare CSV with Task 2. Observe reduced damping.</p>
+        </div><code class="text-xs bg-stone-100 px-2 py-1 rounded mt-2 inline-block">📁 DIgSILENT PowerFactory · CSV export · Modal analysis</code>
+       </div>
+      </div><!-- Division 3 -->
+      <div class="division-card bg-white rounded-2xl overflow-hidden border border-stone-200 sticky">
+       <div class="bg-violet-50 px-5 py-3 border-b border-violet-200 border-l-[6px] border-l-violet-500">
+        <h3 class="font-bold text-stone-800">Power System Stabilizer (PSS) Tuning</h3>
+       </div>
+       <div class="p-5 space-y-3">
+        <div class="border-b border-stone-100 pb-3">
+         <p class="text-sm text-stone-700"><strong>Task 5:</strong> Add PSS_STAB1 model to generator. Extract critical eigenvalue (real part, frequency, damping ratio). Note improvement in damping ratio. Find participation factor.</p>
+        </div>
+        <div class="border-b border-stone-100 pb-3">
+         <p class="text-sm text-stone-700"><strong>Task 6:</strong> PSS + Fault Response. Apply 3-phase symmetrical fault at Bus 2 (5s–5.1s). Plot active power, compare CSV with Task 4. Observe oscillation damping enhancement.</p>
+        </div>
+        <div>
+         <p class="text-sm text-stone-700"><strong>Task 7:</strong> Parameter Sweep on PSS. Test different PSS gains &amp; time constants → evaluate damping factor improvement and system responses.</p>
+        </div><code class="text-xs bg-stone-100 px-2 py-1 rounded mt-2 inline-block">📁 DIgSILENT PowerFactory · CSV export · Modal analysis</code>
+       </div>
+      </div><!-- Division 4 -->
+      <div class="division-card bg-white rounded-2xl overflow-hidden border border-stone-200 sticky">
+       <div class="bg-amber-50 px-5 py-3 border-b border-amber-200 border-l-[6px] border-l-amber-500">
+        <h3 class="font-bold text-stone-800">Frequency Stability &amp; Generator Outage</h3>
+       </div>
+       <div class="p-5 space-y-3">
+        <div class="border-b border-stone-100 pb-3">
+         <p class="text-sm text-stone-700"><strong>Task 4 (Frequency):</strong> Add 20MW generator (11kV) via 50MVA transformer. Run time domain 20s. Outage of G2 → plot frequency response. Extract NADIR, over-frequency, RoCoF.</p>
+        </div>
+        <div class="border-b border-stone-100 pb-3">
+         <p class="text-sm text-stone-700"><strong>Task 5:</strong> Load increase 10% at 5s. Increase active &amp; reactive load by 10% at t=5s. Record frequency indices: nadir, RoCoF, steady-state error.</p>
+        </div>
+        <div>
+         <p class="text-sm text-stone-700"><strong>Task 6:</strong> External Grid loss. Remove external grid connection at 5s → islanded frequency behavior. List NADIR, over-frequency, RoCoF.</p>
+        </div><code class="text-xs bg-stone-100 px-2 py-1 rounded mt-2 inline-block">📁 DIgSILENT PowerFactory · CSV export · Modal analysis</code>
+       </div>
+      </div><!-- Division 5 -->
+      <div class="division-card bg-white rounded-2xl overflow-hidden border border-stone-200 sticky">
+       <div class="bg-rose-50 px-5 py-3 border-b border-rose-200 border-l-[6px] border-l-rose-500">
+        <h3 class="font-bold text-stone-800">Long-Term Voltage Stability (QV/PV)</h3>
+       </div>
+       <div class="p-5 space-y-3">
+        <div class="border-b border-stone-100 pb-3">
+         <p class="text-sm text-stone-700"><strong>Task 1 (Voltage):</strong> P-V curve &amp; VSM. Increase load to 80MW, 0.8pf, Transformer2 to 100MVA. Plot P-V curve → compute Voltage Stability Margin (VSM) and bus sensitivity dV/dP.</p>
+        </div>
+        <div>
+         <p class="text-sm text-stone-700"><strong>Task 2:</strong> QV curve &amp; compensator. Plot QV curve load bus → calculate Reactive Power Margin (RPM). Determine compensator size to bring voltage to 1pu, add compensator and verify new voltage.</p>
+        </div><code class="text-xs bg-stone-100 px-2 py-1 rounded mt-2 inline-block">📁 DIgSILENT PowerFactory · CSV export · Modal analysis</code>
+       </div>
+      </div><!-- Division 6 -->
+      <div class="division-card bg-white rounded-2xl overflow-hidden border border-stone-200 sticky">
+       <div class="bg-red-50 px-5 py-3 border-b border-red-200 border-l-[6px] border-l-red-500">
+        <h3 class="font-bold text-stone-800">Transient Voltage Stability &amp; Dynamic Loads</h3>
+       </div>
+       <div class="p-5 space-y-3">
+        <div class="border-b border-stone-100 pb-3">
+         <p class="text-sm text-stone-700"><strong>Task 3 (Transient Voltage):</strong> Compensator off. Disable compensator, apply 3-phase fault at load bus (5s–5.1s). Plot bus voltage.</p>
+        </div>
+        <div>
+         <p class="text-sm text-stone-700"><strong>Dynamic load 80% &amp; 95%:</strong> Increase dynamic load portion to 80% → compare voltage recovery. Increase to 95%, note voltage collapse behavior.</p>
+        </div><code class="text-xs bg-stone-100 px-2 py-1 rounded mt-2 inline-block">📁 DIgSILENT PowerFactory · CSV export · Modal analysis</code>
+       </div>
+      </div><!-- Division 7 -->
+      <div class="division-card bg-white rounded-2xl overflow-hidden border border-stone-200 sticky">
+       <div class="bg-teal-50 px-5 py-3 border-b border-teal-200 border-l-[6px] border-l-teal-500">
+        <h3 class="font-bold text-stone-800">Hydropower Modeling &amp; OpenHPL</h3>
+       </div>
+       <div class="p-5">
+        <p class="text-sm text-stone-700"><strong>Hydropower ODE Models Demonstration:</strong> Introduction to OpenHPL library, ODE models for hydropower. Marsyangdi plant simulation, governor tuning, model fitting for Nepalese hydropower.</p><code class="text-xs bg-stone-100 px-2 py-1 rounded mt-2 inline-block">📁 DIgSILENT PowerFactory · CSV export · Modal analysis</code>
+       </div>
+      </div>
+     </div>
+    </section><!-- Certificate Section -->
+    <!-- Relevance Section -->
+    <section class="bg-gradient-to-br from-emerald-50 to-green-50 rounded-3xl p-6 border border-emerald-200 sticky">
+     <h2 class="marker-text text-3xl text-stone-700 mb-4">🏢 Strategic Relevance to Power Companies &amp; Utilities</h2>
+     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+      <div class="bg-white/80 rounded-xl p-4 border border-emerald-100">
+       <h4 class="font-bold text-emerald-800 mb-1">Grid Reliability</h4>
+       <p class="text-xs text-stone-600">Frequency Nadir, RoCoF, inertia estimation → real-time control center improvements. Avoid blackouts.</p>
+      </div>
+      <div class="bg-white/80 rounded-xl p-4 border border-emerald-100">
+       <h4 class="font-bold text-emerald-800 mb-1">Oscillation Damping</h4>
+       <p class="text-xs text-stone-600">Eigenvalue analysis &amp; PSS tuning increase transfer capacity by 15–20%.</p>
+      </div>
+      <div class="bg-white/80 rounded-xl p-4 border border-emerald-100">
+       <h4 class="font-bold text-emerald-800 mb-1">Hydropower &amp; Renewables</h4>
+       <p class="text-xs text-stone-600">Digital twins (OpenHPL) reduce downtime; voltage stability indices for RES integration.</p>
+      </div>
+      <div class="bg-white/80 rounded-xl p-4 border border-emerald-100">
+       <h4 class="font-bold text-emerald-800 mb-1">Protection Coordination</h4>
+       <p class="text-xs text-stone-600">Kathmandu Valley case: 59% relay failure, &lt;5% after optimized settings.</p>
+      </div>
+     </div>
+     <p class="text-sm font-medium text-stone-700 mt-4">Direct application: Grid planning, plant tuning, and cross-border grid stability.</p>
+    </section><!-- Footer -->
+    <footer class="text-center py-6 text-stone-500 text-sm border-t border-stone-200">
+     <p>© Prepared By Aavanish Koirala — Kathmandu University, DoEEE | All tasks modeled in DIgSILENT PowerFactory</p>
+    </footer>
+   </div>
+  </div>
+  <script>
+  const defaultConfig = {
+    board_title: "Capacity Building: Dynamic Modeling & Analysis of Electric Grid",
+    background_color: "#f8f6f0",
+    surface_color: "#ffffff",
+    text_color: "#1c1917",
+    primary_color: "#059669",
+    secondary_color: "#d97706",
+    font_family: "DM Sans",
+    font_size: 14
+  };
+
+  function applyConfig(config) {
+    const title = document.getElementById('board-title');
+    if (title) title.textContent = config.board_title || defaultConfig.board_title;
+
+    const wrapper = document.getElementById('app-wrapper');
+    if (wrapper) wrapper.style.fontFamily = `${config.font_family || defaultConfig.font_family}, sans-serif`;
+  }
+
+  window.elementSdk.init({
+    defaultConfig,
+    onConfigChange: async (config) => { applyConfig(config); },
+    mapToCapabilities: (config) => ({
+      recolorables: [
+        { get: () => config.background_color || defaultConfig.background_color, set: (v) => { config.background_color = v; window.elementSdk.setConfig({ background_color: v }); } },
+        { get: () => config.surface_color || defaultConfig.surface_color, set: (v) => { config.surface_color = v; window.elementSdk.setConfig({ surface_color: v }); } },
+        { get: () => config.text_color || defaultConfig.text_color, set: (v) => { config.text_color = v; window.elementSdk.setConfig({ text_color: v }); } },
+        { get: () => config.primary_color || defaultConfig.primary_color, set: (v) => { config.primary_color = v; window.elementSdk.setConfig({ primary_color: v }); } },
+        { get: () => config.secondary_color || defaultConfig.secondary_color, set: (v) => { config.secondary_color = v; window.elementSdk.setConfig({ secondary_color: v }); } }
+      ],
+      borderables: [],
+      fontEditable: { get: () => config.font_family || defaultConfig.font_family, set: (v) => { config.font_family = v; window.elementSdk.setConfig({ font_family: v }); } },
+      fontSizeable: { get: () => config.font_size || defaultConfig.font_size, set: (v) => { config.font_size = v; window.elementSdk.setConfig({ font_size: v }); } }
+    }),
+    mapToEditPanelValues: (config) => new Map([
+      ["board_title", config.board_title || defaultConfig.board_title]
+    ])
+  });
+
+  applyConfig(defaultConfig);
+  lucide.createIcons();
+</script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a0785202ed1f8a21',t:'MTc4MDc1ODM3OQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
